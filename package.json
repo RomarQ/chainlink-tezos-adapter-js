@@ -1,7 +1,7 @@
 {
 	"name": "chainlink-tezos-adapter-js",
 	"version": "0.0.1",
-	"description": "ChainLink Tezos External Adapter",
+	"description": "Chainlink External Adapter For Tezos",
 	"author": {
 		"name": "Rodrigo Quelhas",
 		"email": "rodrigo_quelhas@outlook.pt"
