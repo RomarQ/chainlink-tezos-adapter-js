@@ -1,5 +1,7 @@
 # Chainlink External Adapter For Tezos
 
+![CI](https://github.com/RomarQ/chainlink-tezos-adapter-js/workflows/CI/badge.svg)
+
 ## Requirements
 
 | Requirement |  version  |
