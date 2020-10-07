@@ -27,7 +27,7 @@ jobs:
     - name: yarn test
       run: yarn ci-test
       env: 
-        REPO_TOKEN: ${{ secrets.REPO_TOKEN }}
+        COVERALLS_REPO_TOKEN: ${{ secrets.REPO_TOKEN }}
     - name: Coveralls Parallel
       uses: coverallsapp/github-action@master
       with:
