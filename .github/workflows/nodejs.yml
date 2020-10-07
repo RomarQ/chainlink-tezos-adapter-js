@@ -26,11 +26,12 @@ jobs:
       run: yarn build
     - name: yarn test
       run: yarn ci-test
+      env: 
+        REPO_TOKEN: ${{ secrets.REPO_TOKEN }}
     - name: Coveralls Parallel
       uses: coverallsapp/github-action@master
       with:
-        github-token: ${{ secrets.REPO_TOKEN }}
-        repo-token: ${{ secrets.REPO_TOKEN }}
+        github-token: ${{ secrets.github_token }}
         flag-name: run-node-${{ matrix.node-version }}
         parallel: true
 
@@ -41,6 +42,5 @@ jobs:
     - name: Coveralls Finished
       uses: coverallsapp/github-action@master
       with:
-        github-token: ${{ secrets.REPO_TOKEN }}
-        repo-token: ${{ secrets.REPO_TOKEN }}
+        github-token: ${{ secrets.github_token }}
         parallel-finished: true

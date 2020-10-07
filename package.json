@@ -34,7 +34,7 @@
 		"build": "rollup -c",
 		"watch": "rollup -cw",
 		"test": "jest",
-		"ci-test": "CI=true jest --collect-coverage --coverage && coveralls < coverage/lcov.info",
+		"ci-test": "CI=true jest --coverage && coveralls < coverage/lcov.info",
 		"start": "node -r dotenv/config ./build/tezos-adapter.js",
 		"prettier": "prettier --list-different 'src/**/*.{js,ts}' || (echo '\nPlease fix code formatting by running:\nnpm run prettier:fix\n'; exit 1)",
 		"prettier:fix": "prettier --write 'src/**/*.{js,ts}'",
