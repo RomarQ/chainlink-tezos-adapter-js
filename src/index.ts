@@ -1,5 +1,11 @@
 import Server from './services/Server';
 
+enum EnvironmentKeys {
+    PORT = 'PORT',
+    SECRET_KEY = 'SECRET_KEY',
+    TEZOS_RPC = 'TEZOS_RPC',
+}
+
 [EnvironmentKeys.SECRET_KEY, EnvironmentKeys.TEZOS_RPC].forEach(env => {
     if (!process.env[env]) {
         console.error(`\n[ERROR] - Environment variable \x1b[33m${env}\x1b[0m is missing, add it to .env and try again.\n\n`);
