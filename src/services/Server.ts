@@ -8,6 +8,7 @@ import Wallet from './Wallet';
 import Logger, { accessLog } from './Logger';
 import Validator, { RequestParameters } from './Validator';
 import GenericError from './exceptions/GenericError';
+import { getPrice } from './Prices';
 
 const TezosWallet = new Wallet();
 
@@ -19,13 +20,15 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 app.use(morgan('combined', { stream: accessLog }));
 
-const requestSpec: RequestParameters = {
+export const requestSpec: RequestParameters = {
     id: 'string',
     data: {
         id: 'string',
         oracleAddress: 'string',
         parameters: {
-            price: 'number',
+            decimals: "number",
+            to: 'string',
+            from: 'string',
         },
     },
 };
@@ -40,10 +43,16 @@ app.post('/', async (req, res) => {
 
         const requestId = requestParams.data.id;
         const address = requestParams.data.oracleAddress;
-        const parameters = requestParams.data.parameters;
+
+        // Fetch price from external API
+        const to = requestParams.data.parameters.to;
+        const from = requestParams.data.parameters.from;
+        const decimals = requestParams.data.parameters.decimals;
+
+        const price = Math.floor(await getPrice(from, to) * (decimals ** 10));
 
         // Call Wallet
-        const operation = await TezosWallet.callContract(address, requestId, parameters);
+        const operation = await TezosWallet.callContract(address, requestId, price);
 
         onSuccess(res, operation, requestParams.id);
     } catch (e) {

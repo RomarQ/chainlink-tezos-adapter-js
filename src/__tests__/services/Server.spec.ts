@@ -17,7 +17,9 @@ describe('Server', () => {
                     'Expected field [id] of type (string)',
                     "Expected field [data.id] of type (string)",
                     'Expected field [data.oracleAddress] of type (string)',
-                    'Expected field [parameters.price] of type (number)',
+                    'Expected field [parameters.decimals] of type (number)',
+                    'Expected field [parameters.to] of type (string)',
+                    'Expected field [parameters.from] of type (string)',
                 ],
             },
             status: 'errored',
@@ -36,7 +38,9 @@ describe('Server', () => {
                 errors: [
                     "Expected field [data.id] of type (string)",
                     'Expected field [data.oracleAddress] of type (string)',
-                    'Expected field [parameters.price] of type (number)'
+                    'Expected field [parameters.decimals] of type (number)',
+                    'Expected field [parameters.to] of type (string)',
+                    'Expected field [parameters.from] of type (string)',
                 ],
             },
             status: 'errored',
@@ -54,7 +58,9 @@ describe('Server', () => {
                 message: 'The request is invalid, check the errors for details.',
                 errors: [
                     "Expected field [data.id] of type (string)",
-                    'Expected field [parameters.price] of type (number)'
+                    'Expected field [parameters.decimals] of type (number)',
+                    'Expected field [parameters.to] of type (string)',
+                    'Expected field [parameters.from] of type (string)',
                 ],
             },
             status: 'errored',
@@ -73,7 +79,9 @@ describe('Server', () => {
                 errors: [
                     'Expected field [id] of type (string)',
                     "Expected field [data.id] of type (string)",
-                    'Expected field [parameters.price] of type (number)'
+                    'Expected field [parameters.decimals] of type (number)',
+                    'Expected field [parameters.to] of type (string)',
+                    'Expected field [parameters.from] of type (string)',
                 ],
             },
             status: 'errored',
@@ -90,7 +98,9 @@ describe('Server', () => {
                     id: "id",
                     oracleAddress: 'DUMMY',
                     parameters: {
-                        price: 1
+                        decimals: 8,
+                        from: "XTZ",
+                        to: "EUR"
                     }
                 }
             });
