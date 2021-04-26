@@ -6,7 +6,6 @@ export type RequestParameters = {
 
 const validateRequest = (spec: RequestParameters, requestParameters: RequestParameters): void => {
     const errors = validateSpec(spec, undefined, Object.keys(spec), requestParameters);
-
     if (errors.length > 0) {
         throw new ValidationError('The request is invalid, check the errors for details.', errors);
     }

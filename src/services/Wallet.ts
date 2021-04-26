@@ -19,19 +19,19 @@ export default class Wallet {
      *
      * @param destination contract address
      * @param request_id request identifier
-     * @param parameters the parameters being transmited to the contract
+     * @param price current price
      *
      * @returns {Promise<TransactionOperation>}
      */
     public callContract = async (
         destination: string,
         request_id: string,
-        parameters: { price: number },
+        price: number,
     ): Promise<TransactionOperation> => {
         const contract = await Tezos.contract.at(destination);
 
         const response = MichelsonMap.fromLiteral({
-            price: { int: parameters.price },
+            price: { int: price },
         });
 
         const operation = await contract.methods['fulfill_request'](request_id, response).send();

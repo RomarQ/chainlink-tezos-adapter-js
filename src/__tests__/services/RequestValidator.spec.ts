@@ -1,15 +1,6 @@
 import RequestValidationError from '../../services/exceptions/RequestValidationError';
+import { requestSpec } from '../../services/Server';
 import Validator from '../../services/Validator';
-
-const requestSpec = {
-    id: 'string',
-    data: {
-        oracleAddress: 'string',
-        parameters: {
-            price: 'number'
-        }
-    },
-};
 
 describe('Validator', () => {
     it('Validate Request - Empty Body', () => {
@@ -36,9 +27,12 @@ describe('Validator', () => {
         const request = {
             id: 'id',
             data: {
+                id: "id",
                 oracleAddress: 'address',
                 parameters: {
-                    price: 1
+                    decimals: 8,
+                    from: "EUR",
+                    to: "XTZ",
                 }
             }
         };

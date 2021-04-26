@@ -24,6 +24,7 @@ yarn build
 # Configure environment variables
 echo "
 PORT=<...> // Optional: (3000 is the default)
+PRICE_SOURCE=<KRAKEN|COINBASE> // COINBASE is the default
 SECRET_KEY=<...>
 TEZOS_RPC=<...>
 " > .env
@@ -41,7 +42,9 @@ yarn start
         "id"                : string, // Request identifier
         "oracleAddress"     : string, // (e.g. "KT1..."),
         "parameters"        : {
-            price: int // (e.g. 300),
+            decimals    : number    // (e.g. 8)
+            from        : string    // (e.g. XTZ),
+            to          : string    // (e.g. EUR),
         },
     }
 }

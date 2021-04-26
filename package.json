@@ -18,8 +18,9 @@
 		"lint": "eslint '*/**/*.{js,ts}' --quiet --fix"
 	},
 	"dependencies": {
-		"@taquito/taquito": "8.1.1",
 		"@taquito/signer": "8.1.1",
+		"@taquito/taquito": "8.1.1",
+		"axios": "^0.21.1",
 		"body-parser": "1.19.0",
 		"cors": "2.8.5",
 		"dotenv": "8.2.0",
