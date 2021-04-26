@@ -22,28 +22,28 @@ app.use(morgan('combined', { stream: accessLog }));
 const requestSpec: RequestParameters = {
     id: 'string',
     data: {
-        address: 'string',
-        result: 'string',
-        type: 'string',
-        request_id: 'string',
+        id: 'string',
+        oracleAddress: 'string',
+        parameters: {
+            price: 'number',
+        },
     },
 };
 
 // API Routes
 app.post('/', async (req, res) => {
     const requestParams = req.body;
-    Logger.debug(`Received request: (body: ${requestParams}`);
+    Logger.debug(`Received request: (body: ${JSON.stringify(requestParams)}`);
     try {
         // Validate the request before proceeding
         Validator.validateRequest(requestSpec, requestParams);
 
-        const address = requestParams.data.address;
-        const result = requestParams.data.result;
-        const type = requestParams.data.type;
-        const requestId = requestParams.data.request_id;
+        const requestId = requestParams.data.id;
+        const address = requestParams.data.oracleAddress;
+        const parameters = requestParams.data.parameters;
 
         // Call Wallet
-        const operation = await TezosWallet.callOracle(address, requestId, type, result);
+        const operation = await TezosWallet.callContract(address, requestId, parameters);
 
         onSuccess(res, operation, requestParams.id);
     } catch (e) {

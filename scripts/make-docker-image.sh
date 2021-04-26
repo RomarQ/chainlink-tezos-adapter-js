@@ -26,7 +26,7 @@ do_help () {
 base_image=node
 make_dockerfile () {
     cat > Dockerfile <<EOF
-FROM node
+FROM $base_image
 
 # Copy the sources to the container
 COPY . /adapter
