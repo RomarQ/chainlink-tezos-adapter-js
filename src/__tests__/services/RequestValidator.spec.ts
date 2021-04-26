@@ -4,8 +4,10 @@ import Validator from '../../services/Validator';
 const requestSpec = {
     id: 'string',
     data: {
-        address: 'string',
-        request_id: 'string',
+        oracleAddress: 'string',
+        parameters: {
+            price: 'number'
+        }
     },
 };
 
@@ -21,17 +23,25 @@ describe('Validator', () => {
     });
 
     it('Validate Request - With an incomplete data object', () => {
-        const request = { id: 'id', data: { address: 'address' } };
+        const request = { id: 'id', data: { oracleAddress: 'address' } };
         expect(() => Validator.validateRequest(requestSpec, request)).toThrow(RequestValidationError);
     });
 
     it('Validate Request - With an incorrect types in data object', () => {
-        const request = { id: 'id', data: { address: 1, request_id: '1' } };
+        const request = { id: 'id', data: { oracleAddress: 1, parameters: '1' } };
         expect(() => Validator.validateRequest(requestSpec, request)).toThrow(RequestValidationError);
     });
 
     it('Validate Request - Valid Request', () => {
-        const request = { id: 'id', data: { address: 'address', request_id: '1' } };
+        const request = {
+            id: 'id',
+            data: {
+                oracleAddress: 'address',
+                parameters: {
+                    price: 1
+                }
+            }
+        };
         expect(() => Validator.validateRequest(requestSpec, request)).not.toThrow();
     });
 });

@@ -1,8 +1,10 @@
-export const Tezos = {
-    setSignerProvider: (signer: string) => null,
-    setRpcProvider: (rpc: string) => null,
+export * from '@taquito/taquito'
 
-    contract: {
+export class TezosToolkit {
+    public setSignerProvider = (signer: string) => null;
+    public setRpcProvider = (rpc: string) => null;
+
+    public contract = {
         at: async (address: string) => {
             return {
                 methods: {
@@ -12,5 +14,5 @@ export const Tezos = {
                 },
             };
         },
-    },
+    }
 };

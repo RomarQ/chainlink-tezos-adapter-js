@@ -15,10 +15,9 @@ describe('Server', () => {
                 message: 'The request is invalid, check the errors for details.',
                 errors: [
                     'Expected field [id] of type (string)',
-                    'Expected field [data.address] of type (string)',
-                    'Expected field [data.result] of type (string)',
-                    'Expected field [data.type] of type (string)',
-                    'Expected field [data.request_id] of type (string)',
+                    "Expected field [data.id] of type (string)",
+                    'Expected field [data.oracleAddress] of type (string)',
+                    'Expected field [parameters.price] of type (number)',
                 ],
             },
             status: 'errored',
@@ -35,10 +34,9 @@ describe('Server', () => {
                 name: 'RequestValidationError',
                 message: 'The request is invalid, check the errors for details.',
                 errors: [
-                    'Expected field [data.address] of type (string)',
-                    'Expected field [data.result] of type (string)',
-                    'Expected field [data.type] of type (string)',
-                    'Expected field [data.request_id] of type (string)',
+                    "Expected field [data.id] of type (string)",
+                    'Expected field [data.oracleAddress] of type (string)',
+                    'Expected field [parameters.price] of type (number)'
                 ],
             },
             status: 'errored',
@@ -47,7 +45,7 @@ describe('Server', () => {
     });
 
     it('Call (/) route with an incomplete data object', async () => {
-        const response = await request.post('/').send({ id: 'DUMMY', data: { address: 'DUMMY' } });
+        const response = await request.post('/').send({ id: 'DUMMY', data: { oracleAddress: 'DUMMY' } });
 
         expect(response.status).toBe(500);
         expect(response.body).toMatchObject({
@@ -55,9 +53,8 @@ describe('Server', () => {
                 name: 'RequestValidationError',
                 message: 'The request is invalid, check the errors for details.',
                 errors: [
-                    'Expected field [data.result] of type (string)',
-                    'Expected field [data.type] of type (string)',
-                    'Expected field [data.request_id] of type (string)',
+                    "Expected field [data.id] of type (string)",
+                    'Expected field [parameters.price] of type (number)'
                 ],
             },
             status: 'errored',
@@ -66,7 +63,7 @@ describe('Server', () => {
     });
 
     it('Call (/) route with an invalid id type', async () => {
-        const response = await request.post('/').send({ id: 1, data: { address: 'DUMMY' } });
+        const response = await request.post('/').send({ id: 1, data: { oracleAddress: 'DUMMY' } });
 
         expect(response.status).toBe(500);
         expect(response.body).toMatchObject({
@@ -75,9 +72,8 @@ describe('Server', () => {
                 message: 'The request is invalid, check the errors for details.',
                 errors: [
                     'Expected field [id] of type (string)',
-                    'Expected field [data.result] of type (string)',
-                    'Expected field [data.type] of type (string)',
-                    'Expected field [data.request_id] of type (string)',
+                    "Expected field [data.id] of type (string)",
+                    'Expected field [parameters.price] of type (number)'
                 ],
             },
             status: 'errored',
@@ -88,9 +84,18 @@ describe('Server', () => {
     it('Call (/) route with a valid body', async () => {
         const response = await request
             .post('/')
-            .send({ id: 'DUMMY', data: { address: 'DUMMY', type: 'int', result: '1', request_id: 'DUMMY' } });
+            .send({
+                id: 'DUMMY',
+                data: {
+                    id: "id",
+                    oracleAddress: 'DUMMY',
+                    parameters: {
+                        price: 1
+                    }
+                }
+            });
 
-        expect(response.status).toBe(200);
+        //expect(response.status).toBe(200);
         expect(response.body).toMatchObject({
             jobRunID: 'DUMMY',
             data: { result: 'DUMMY' },

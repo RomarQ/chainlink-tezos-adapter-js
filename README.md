@@ -3,6 +3,8 @@
 ![CI](https://github.com/RomarQ/chainlink-tezos-adapter-js/workflows/CI/badge.svg)
 [![Coverage Status](https://coveralls.io/repos/github/RomarQ/chainlink-tezos-adapter-js/badge.svg?t=a5lpIZ)](https://coveralls.io/github/RomarQ/chainlink-tezos-adapter-js)
 
+This repository contains boilerplate code that can be used as a chainlink external adapter to interact with the Tezos blockchain.
+
 ## Requirements
 
 | Requirement |  version  |
@@ -32,25 +34,18 @@ yarn start
 <br/>
 
 ## Expected Body Parameters
-```js
+```ts
 {
-    "id": string,         // The job identifier,
+    "id": string,         // The job run identifier,
     "data": {
-        "address": string // (e.g. "KT1..."),
-        "result": string, // (e.g. "10", "0x10")
-        "type": "int" | "string" | "bytes",
-        "request_id": string
+        "id"                : string, // Request identifier
+        "oracleAddress"     : string, // (e.g. "KT1..."),
+        "parameters"        : {
+            price: int // (e.g. 300),
+        },
     }
 }
 ```
-
-**Params:**
-
-- **`address`** - The address of the `oracle contract`
-- **`result`** - The `result` to send to the `fulfill_request` entry point
-- **`type`** - The `result` type (`"int"` | `"string"` | `"bytes"`)
-- **`request_id`** - The oracle request id
-
 <br/>
 
 ## References
