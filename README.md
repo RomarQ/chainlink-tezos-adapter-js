@@ -42,9 +42,9 @@ yarn start
         "id"                : string, // Request identifier
         "oracleAddress"     : string, // (e.g. "KT1..."),
         "parameters"        : {
-            decimals    : number    // (e.g. 8)
-            from        : string    // (e.g. XTZ),
-            to          : string    // (e.g. EUR),
+            "decimals"    : number    // (e.g. 8)
+            "from"        : string    // (e.g. XTZ),
+            "to"          : string    // (e.g. EUR),
         },
     }
 }
