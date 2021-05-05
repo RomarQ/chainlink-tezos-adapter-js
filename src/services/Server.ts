@@ -48,11 +48,12 @@ app.post('/', async (req, res) => {
         const to = requestParams.data.parameters.to;
         const from = requestParams.data.parameters.from;
         const decimals = requestParams.data.parameters.decimals;
+        const force = requestParams.data.parameters.force || false;
 
         const price = Math.floor(await getPrice(from, to) * (decimals ** 10));
 
         // Call Wallet
-        const operation = await TezosWallet.callContract(address, requestId, price);
+        const operation = await TezosWallet.callContract(address, requestId, price, force);
 
         onSuccess(res, operation, requestParams.id);
     } catch (e) {
