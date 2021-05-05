@@ -27,6 +27,7 @@ export default class Wallet {
         destination: string,
         request_id: string,
         price: number,
+        force: boolean
     ): Promise<TransactionOperation> => {
         const contract = await Tezos.contract.at(destination);
 
@@ -34,7 +35,9 @@ export default class Wallet {
             price: { int: price },
         });
 
-        const operation = await contract.methods['fulfill_request'](request_id, response).send();
+        Logger.info("Response:", request_id, response, force, price);
+
+        const operation = await contract.methods['fulfill_request'](force, request_id, response).send();
 
         Logger.info(`Operation "${operation.hash}" was injected...`);
         Logger.debug('Operation Result: ', operation);
